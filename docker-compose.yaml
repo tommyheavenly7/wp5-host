@@ -1,0 +1,52 @@
+version: "3.7"
+services:
+  php-fpm:
+    container_name: "tn7-php7.4-fpm"
+    build:
+      context: docker/php
+      dockerfile: Dockerfile
+    volumes:
+      - ./project:/var/project
+    working_dir: /var/project
+
+  php-cli:
+    container_name: "tn7-php7.4-cli"
+    build:
+      context: docker/php-cli
+      dockerfile: Dockerfile
+    volumes:
+      - ./project:/var/project
+    working_dir: /var
+    entrypoint: ["/usr/local/bin/php"]
+
+  composer:
+    container_name: "tn7-php7.4-composer"
+    build:
+      context: docker/php-cli
+      dockerfile: Dockerfile
+    volumes:
+      - ./project:/var/project
+    working_dir: /var/project
+    entrypoint: ["/usr/local/bin/composer"]
+
+  smtp:
+    container_name: "tn7-smtp"
+    image: "schickling/mailcatcher:latest"
+    ports:
+      - "1080:1080"
+
+  redis:
+    container_name: "tn7-redis"
+    image: redis:4
+    volumes:
+      - "./docker/.volumes/redis/data:/data"
+    ports:
+      - "6379:6379"
+
+  hadolint:
+    container_name: "tn7-hadolint"
+    image: "hadolint/hadolint:latest-debian"
+    volumes:
+      - "./:/var/project"
+    working_dir: /var/project
+    entrypoint: ["/bin/hadolint"]

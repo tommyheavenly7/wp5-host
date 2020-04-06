@@ -1,0 +1,23 @@
+{
+    "name": "tommynovember7/docker-images",
+    "description": "Dockerfiles for private projects",
+    "type": "project",
+    "require": {
+        "php": "^7.4",
+        "predis/predis": "^1.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tomo L. Miyamoto",
+            "email": "lancelot@tommynovember7.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "^9.1"
+    },
+    "scripts": {
+        "run-test": "phpunit RedisConnectionTest.php"
+    }
+}
