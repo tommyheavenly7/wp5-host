@@ -1,4 +1,4 @@
-# PHP Images
+# wp5-host
 
 ## Build Dockerfiles
 
