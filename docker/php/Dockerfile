@@ -20,6 +20,7 @@ RUN apk --no-cache add \
     "libpng-dev>=1.6.37-r1" \
     "libtool>=2.4.6-r7" \
     "make>=4.2.1-r2" \
+    "mysql-client" \
     "nasm>=2.14.02-r0" \
     "python3-dev>=3.8.2-r0" \
     "python3>=3.8.2-r0" \
@@ -42,11 +43,17 @@ RUN chmod uga+x /usr/local/bin/install-php-extensions \
 RUN install-php-extensions apcu
 RUN install-php-extensions bz2
 RUN install-php-extensions calendar
+RUN install-php-extensions exif
+RUN install-php-extensions gd
 RUN install-php-extensions gettext
 RUN install-php-extensions igbinary
 RUN install-php-extensions imagick
 RUN install-php-extensions intl
 RUN install-php-extensions mcrypt
+RUN install-php-extensions mysqli
+RUN install-php-extensions opcache
+RUN install-php-extensions pcntl
+RUN install-php-extensions pdo_mysql
 RUN install-php-extensions redis
 RUN install-php-extensions shmop
 RUN install-php-extensions soap
@@ -56,6 +63,7 @@ RUN install-php-extensions sysvsem
 RUN install-php-extensions sysvshm
 RUN install-php-extensions xdebug
 RUN install-php-extensions xsl
+RUN install-php-extensions zip
 
 RUN printf  "[date]\ndate.timezone = %s\n" 'Asia/Tokyo' > /usr/local/etc/php/conf.d/date.ini \
     && echo "memory_limit=-1" > /usr/local/etc/php/conf.d/memory-limit.ini \

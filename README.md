@@ -24,7 +24,13 @@ _build
 ### Redis connection test
 
 ```bash
-composer run-test
+composer run redis-test
+```
+
+### MySQL connection test
+
+```bash
+composer run mysql-test
 ```
 
 ### Email function test

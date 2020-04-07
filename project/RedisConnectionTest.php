@@ -9,10 +9,10 @@ use Predis\Client;
  */
 class RedisConnectionTest extends TestCase
 {
-    const TEST_KEY = 'foo';
-    const TEST_VALUE = 'Cowabunga';
+    private const TEST_KEY = 'foo';
+    private const TEST_VALUE = 'Cowabunga';
 
-    public function testSetAndGet()
+    public function testSetAndGet(): void
     {
         $client = $this->createClient();
         $client->set(self::TEST_KEY, self::TEST_VALUE);

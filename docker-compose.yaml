@@ -37,11 +37,22 @@ services:
 
   redis:
     container_name: "tn7-redis"
-    image: redis:4
+    image: "redis:4"
     volumes:
       - "./docker/.volumes/redis/data:/data"
     ports:
       - "6379:6379"
+
+  mysql:
+    container_name: "tn7-mysql"
+    image: "mysql:5.7"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD=
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./docker/.volumes/mysql:/var/lib/mysql"
 
   hadolint:
     container_name: "tn7-hadolint"
