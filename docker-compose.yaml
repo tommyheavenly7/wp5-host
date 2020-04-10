@@ -61,3 +61,10 @@ services:
       - "./:/var/project"
     working_dir: /var/project
     entrypoint: ["/bin/hadolint"]
+
+  git:
+    container_name: "tn7-git"
+    image: "alpine/git:latest"
+    volumes:
+      - "./docker/.volumes/git/.ssh:/root/.ssh"
+      - "./:/git"
