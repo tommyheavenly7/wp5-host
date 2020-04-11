@@ -10,7 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+
+      - name: Cache composer packages
+        uses: actions/cache@v1
+        env:
+          cache-name: cache-composer-packages
+        with:
+          path: ~/.composer
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: Build test containers
         run: |
@@ -31,7 +43,7 @@ jobs:
 
       - name: Build a new container
         run: |
-          docker login docker.pkg.github.com -u ${{ secrets.USER_NAME }} --password ${{ secrets.PACKAGE_TOKEN }}
+          echo ${{ secrets.PACKAGE_TOKEN }} | docker login docker.pkg.github.com -u ${{ secrets.USER_NAME }} --password-stdin
           docker build --tag docker.pkg.github.com/tommyheavenly7/wp5-host/php-cli:7.4 ./docker/php-cli/
           docker push docker.pkg.github.com/tommyheavenly7/wp5-host/php-cli:7.4
           docker build --tag docker.pkg.github.com/tommyheavenly7/wp5-host/php-fpm:7.4 ./docker/php/

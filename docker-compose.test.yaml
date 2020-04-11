@@ -6,6 +6,7 @@ services:
       context: docker/php-cli
       dockerfile: Dockerfile
     volumes:
+      - ./docker/.volumes/composer:/root/.composer
       - ./project:/var/project
     working_dir: /var/project
     entrypoint: ["/usr/local/bin/composer"]
