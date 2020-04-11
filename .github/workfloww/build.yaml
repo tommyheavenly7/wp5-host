@@ -1,0 +1,20 @@
+name: "BUILD IMAGES"
+
+on: push
+
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Build test containers
+        run: |
+          docker-compose --file docker-compose.test.yaml build --force-rm --compress
+          docker-compose --file docker-compose.test.yaml up -d
+          docker-compose --file docker-compose.test.yaml run --rm composer install
+          docker-compose ps
+
+      - name: Run tests
+        run: docker-compose --file docker-compose.test.yaml run --rm composer run tests
