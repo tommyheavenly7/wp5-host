@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+  composer:
+    container_name: "tn7-test-composer"
+    build:
+      context: docker/php-cli
+      dockerfile: Dockerfile
+    volumes:
+      - ./project:/var/project
+    working_dir: /var/project
+    entrypoint: ["/usr/local/bin/composer"]
+
+  smtp:
+    container_name: "tn7-test-smtp"
+    image: "schickling/mailcatcher:latest"
+    ports:
+      - "1080:1080"
+
+  redis:
+    container_name: "tn7-test-redis"
+    image: "redis:4"
+    ports:
+      - "6379:6379"
+
+  mysql:
+    container_name: "tn7-test-mysql"
+    image: "mysql:5.7"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD=
+    ports:
+      - "3306:3306"
