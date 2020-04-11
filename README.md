@@ -15,7 +15,7 @@ $ docker/bin/build-dockerfiles.sh php
 Before running tests, you should build containers:
 
 ```bash
-source .bashrc
+source docker/.bashrc
 _build
 ```
 
