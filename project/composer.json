@@ -5,7 +5,9 @@
     "require": {
         "php": "^7.4",
         "predis/predis": "^1.1",
-        "ext-mysqli": "*"
+        "ext-mysqli": "*",
+        "guzzlehttp/guzzle": "^6.5",
+        "ext-json": "*"
     },
     "license": "MIT",
     "authors": [
@@ -16,10 +18,13 @@
     ],
     "minimum-stability": "stable",
     "require-dev": {
+        "roave/security-advisories": "dev-master",
         "phpunit/phpunit": "^9.1"
     },
     "scripts": {
-        "redis-test": "phpunit --testdox RedisConnectionTest.php",
-        "mysql-test": "phpunit --testdox MysqliConnectionTest.php"
+        "redis-test": "phpunit --debug --testdox tests/RedisConnectionTest.php",
+        "mysql-test": "phpunit --debug --testdox tests/MysqliConnectionTest.php",
+        "email-test": "phpunit --debug --testdox tests/EmailTest.php",
+        "tests": "phpunit --testdox tests"
     }
 }
