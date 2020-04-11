@@ -1,6 +1,9 @@
 name: "BUILD IMAGES"
 
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   run_tests:
@@ -18,3 +21,18 @@ jobs:
 
       - name: Run tests
         run: docker-compose --file docker-compose.test.yaml run --rm composer run tests
+
+  build_images:
+    needs: run_tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Build a new container
+        run: |
+          docker login docker.pkg.github.com -u ${{ secrets.USER_NAME }} --password ${{ secrets.PACKAGE_TOKEN }}
+          docker build --tag docker.pkg.github.com/tommyheavenly7/wp5-host/php-cli:7.4 ./docker/php-cli/
+          docker push docker.pkg.github.com/tommyheavenly7/wp5-host/php-cli:7.4
+          docker build --tag docker.pkg.github.com/tommyheavenly7/wp5-host/php-fpm:7.4 ./docker/php/
+          docker push docker.pkg.github.com/tommyheavenly7/wp5-host/php-fpm:7.4
