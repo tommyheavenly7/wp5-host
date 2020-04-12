@@ -24,12 +24,21 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - name: Run tests
+      - name: Build test containers
         run: |
           docker-compose --file docker-compose.test.yaml build --force-rm --compress
           docker-compose --file docker-compose.test.yaml up -d
           docker-compose --file docker-compose.test.yaml run --rm composer install
-          docker-compose --file docker-compose.test.yaml run --rm sut
+          docker-compose --file docker-compose.test.yaml run --rm composer fund
+
+      - name: Verify MySQL connection
+          run: |
+            while ! mysqladmin ping -h"0.0.0.0" -P"3306" --silent; do
+              sleep 1
+        done
+
+      - name: Run tests
+        run: docker-compose --file docker-compose.test.yaml run --rm sut
 
   build_images:
     needs: run_tests
