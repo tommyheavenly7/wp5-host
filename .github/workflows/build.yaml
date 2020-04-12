@@ -24,15 +24,12 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - name: Build test containers
+      - name: Run tests
         run: |
           docker-compose --file docker-compose.test.yaml build --force-rm --compress
           docker-compose --file docker-compose.test.yaml up -d
           docker-compose --file docker-compose.test.yaml run --rm composer install
-          docker-compose ps
-
-      - name: Run tests
-        run: docker-compose --file docker-compose.test.yaml run --rm composer run tests
+          docker-compose --file docker-compose.test.yaml run --rm sut
 
   build_images:
     needs: run_tests

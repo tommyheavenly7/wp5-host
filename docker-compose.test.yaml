@@ -11,6 +11,21 @@ services:
     working_dir: /var/project
     entrypoint: ["/usr/local/bin/composer"]
 
+  sut:
+    container_name: "tn7-test-sut"
+    build:
+      context: docker/php-cli
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+      - redis
+      - smtp
+    volumes:
+      - ./docker/.volumes/composer:/root/.composer
+      - ./project:/var/project
+    working_dir: /var/project
+    command: ["/usr/local/bin/composer", "run", "tests"]
+
   smtp:
     container_name: "tn7-test-smtp"
     image: "schickling/mailcatcher:latest"
