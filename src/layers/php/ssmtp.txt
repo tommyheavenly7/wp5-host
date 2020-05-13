@@ -1,6 +1,6 @@
 ## ssmtp
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
-RUN cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.dist && \
-    sed 's/^mailhub=mail/mailhub=smtp:1025/g' /etc/ssmtp/ssmtp.conf.dist | sed 's/^#hostname/hostname/g' > /etc/ssmtp/ssmtp.conf && \
-    printf "FromLineOverride=%s\n" 'YES' >> /etc/ssmtp/ssmtp.conf
+RUN cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.dist \
+    && sed 's/^mailhub=mail/mailhub=smtp:1025/g' /etc/ssmtp/ssmtp.conf.dist | sed 's/^#hostname/hostname/g' > /etc/ssmtp/ssmtp.conf \
+    && printf "FromLineOverride=%s\n" 'YES' >> /etc/ssmtp/ssmtp.conf
 

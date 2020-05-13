@@ -10,7 +10,7 @@ else
   TARGET="$1"
 fi
 
-if [[ ${TARGET} = 'php' || 'ALL' ]]; then
+if [[ ${TARGET} = 'php' || ${TARGET} = 'ALL' ]]; then
     # php-fpm
     printf "FROM php:7.4-fpm-alpine\n\n" > docker/php/Dockerfile && \
     cat src/layers/php/apk-add.txt >> docker/php/Dockerfile && \

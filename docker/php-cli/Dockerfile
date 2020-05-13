@@ -20,7 +20,7 @@ RUN apk --no-cache add \
     "libpng-dev>=1.6.37-r1" \
     "libtool>=2.4.6-r7" \
     "make>=4.2.1-r2" \
-    "mysql-client" \
+    "mysql-client>=10.4.12-r0" \
     "nasm>=2.14.02-r0" \
     "python3-dev>=3.8.2-r0" \
     "python3>=3.8.2-r0" \
@@ -32,9 +32,9 @@ RUN pip3 install --upgrade "pip>==20.0.2" "setuptools>==46.1.3"
 
 ## ssmtp
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
-RUN cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.dist && \
-    sed 's/^mailhub=mail/mailhub=smtp:1025/g' /etc/ssmtp/ssmtp.conf.dist | sed 's/^#hostname/hostname/g' > /etc/ssmtp/ssmtp.conf && \
-    printf "FromLineOverride=%s\n" 'YES' >> /etc/ssmtp/ssmtp.conf
+RUN cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.dist \
+    && sed 's/^mailhub=mail/mailhub=smtp:1025/g' /etc/ssmtp/ssmtp.conf.dist | sed 's/^#hostname/hostname/g' > /etc/ssmtp/ssmtp.conf \
+    && printf "FromLineOverride=%s\n" 'YES' >> /etc/ssmtp/ssmtp.conf
 
 # PHP
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
@@ -43,6 +43,7 @@ RUN chmod uga+x /usr/local/bin/install-php-extensions \
 RUN install-php-extensions apcu
 RUN install-php-extensions bz2
 RUN install-php-extensions calendar
+RUN install-php-extensions dba
 RUN install-php-extensions exif
 RUN install-php-extensions gd
 RUN install-php-extensions gettext
@@ -64,6 +65,15 @@ RUN install-php-extensions sysvshm
 RUN install-php-extensions xdebug
 RUN install-php-extensions xsl
 RUN install-php-extensions zip
+
+WORKDIR /tmp
+RUN wget https://github.com/esminis/php_pecl_rar/archive/v4.0.6.tar.gz \
+    && mkdir -p /tmp/rar \
+    && tar -xf v4.0.6.tar.gz -C /tmp/rar --strip-components=1 \
+    && rm v4.0.6.tar.gz \
+    && docker-php-ext-configure /tmp/rar --enable-rar \
+    && docker-php-ext-install /tmp/rar \
+    && rm -r /tmp/rar
 
 RUN printf  "[date]\ndate.timezone = %s\n" 'Asia/Tokyo' > /usr/local/etc/php/conf.d/date.ini \
     && echo "memory_limit=-1" > /usr/local/etc/php/conf.d/memory-limit.ini \
