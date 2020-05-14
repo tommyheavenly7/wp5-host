@@ -55,14 +55,6 @@ services:
     volumes:
       - "./docker/.volumes/mysql:/var/lib/mysql"
 
-  hadolint:
-    container_name: "tn7-hadolint"
-    image: "hadolint/hadolint:latest-debian"
-    volumes:
-      - "./:/var/project"
-    working_dir: /var/project
-    entrypoint: ["/bin/hadolint"]
-
   git:
     container_name: "tn7-git"
     image: "alpine/git:latest"
