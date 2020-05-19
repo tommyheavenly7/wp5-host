@@ -5,6 +5,7 @@ RUN apk --no-cache add \
     "automake>=1.16.1-r0" \
     "build-base>=0.5-r1" \
     "curl>=7.67.0-r0" \
+    "ffmpeg>=4.2.1-r3" \
     "g++>=9.2.0-r4" \
     "gcc>=9.2.0-r4" \
     "ghostscript>=9.50-r0" \
