@@ -20,6 +20,7 @@ RUN apk --no-cache add \
     "libjpeg>=8-r6" \
     "libpng-dev>=1.6.37-r1" \
     "libtool>=2.4.6-r7" \
+    "libwebp-dev>=1.0.3-r0" \
     "make>=4.2.1-r2" \
     "mysql-client>=10.4.12-r0" \
     "nasm>=2.14.02-r0" \
