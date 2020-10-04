@@ -4,29 +4,34 @@ RUN apk --no-cache add \
     "autoconf>=2.69-r2" \
     "automake>=1.16.1-r0" \
     "build-base>=0.5-r1" \
-    "curl>=7.67.0-r0" \
-    "ffmpeg>=4.2.1-r3" \
+    "curl>=7.69.1-r1" \
+    "ffmpeg>=4.3.1-r0" \
     "g++>=9.2.0-r4" \
     "gcc>=9.2.0-r4" \
     "ghostscript>=9.50-r0" \
     "git>=2.24.1-r0" \
+    "gnutls>=3.6.15-r0" \
     "groff>=1.22.4-r0" \
     "icu-dev>=64.2-r1" \
-    "imagemagick-dev>=7.0.9.7-r0" \
-    "imagemagick>=7.0.9.7-r0" \
+    "imagemagick-dev>=7.0.10.18-r0" \
+    "imagemagick>=7.0.10.18-r0" \
     "lcms2-dev>=2.9-r1" \
     "less>=551-r0" \
     "libgit2-dev>=0.28.5-r0" \
+    "libjpeg-turbo>=2.0.4-r2" \
     "libjpeg>=8-r6" \
     "libpng-dev>=1.6.37-r1" \
+    "libssh>=0.9.4-r1" \
     "libtool>=2.4.6-r7" \
     "libwebp-dev>=1.0.3-r0" \
+    "libx11>=1.6.12-r0" \
+    "libxml2>=2.9.10-r5" \
     "make>=4.2.1-r2" \
     "mysql-client>=10.4.12-r0" \
     "nasm>=2.14.02-r0" \
     "py-pip>=18.1-r0" \
-    "python3-dev>=3.8.2-r0" \
-    "python3>=3.8.2-r0" \
+    "python3-dev>=3.8.5-r0" \
+    "python3>=3.8.5-r0" \
     "ssmtp>=2.64-r14" \
     "zlib-dev>=1.2.11-r3"
 
@@ -43,31 +48,32 @@ RUN cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.dist \
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
 RUN chmod uga+x /usr/local/bin/install-php-extensions \
     && sync
-RUN install-php-extensions apcu
-RUN install-php-extensions bz2
-RUN install-php-extensions calendar
-RUN install-php-extensions dba
-RUN install-php-extensions exif
-RUN install-php-extensions gd
-RUN install-php-extensions gettext
-RUN install-php-extensions igbinary
-RUN install-php-extensions imagick
-RUN install-php-extensions intl
-RUN install-php-extensions mcrypt
-RUN install-php-extensions mysqli
-RUN install-php-extensions opcache
-RUN install-php-extensions pcntl
-RUN install-php-extensions pdo_mysql
-RUN install-php-extensions redis
-RUN install-php-extensions shmop
-RUN install-php-extensions soap
-RUN install-php-extensions sockets
-RUN install-php-extensions sysvmsg
-RUN install-php-extensions sysvsem
-RUN install-php-extensions sysvshm
-RUN install-php-extensions xdebug
-RUN install-php-extensions xsl
-RUN install-php-extensions zip
+RUN install-php-extensions \
+    apcu \
+    bz2 \
+    calendar \
+    dba \
+    exif \
+    gd \
+    gettext \
+    igbinary \
+    imagick \
+    intl \
+    mcrypt \
+    mysqli \
+    opcache \
+    pcntl \
+    pdo_mysql \
+    redis \
+    shmop \
+    soap \
+    sockets \
+    sysvmsg \
+    sysvsem \
+    sysvshm \
+    xdebug \
+    xsl \
+    zip
 
 WORKDIR /tmp
 RUN wget https://github.com/esminis/php_pecl_rar/archive/v4.0.6.tar.gz \
@@ -87,4 +93,3 @@ RUN printf  "[date]\ndate.timezone = %s\n" 'Asia/Tokyo' > /usr/local/etc/php/con
     && echo 'sendmail_path = "/usr/sbin/ssmtp -t"' > /usr/local/etc/php/conf.d/mail.ini \
     && printf "\nxdebug.remote_enable = %s\nxdebug.remote_autostart = %s" 'On' 'On' >> /usr/local/etc/php/conf.d/xdebug.ini \
     && printf "\nxdebug.remote_connect_back = %s\nxdebug.remote_host = docker.for.mac.localhost" 'Off' >> /usr/local/etc/php/conf.d/xdebug.ini
-
