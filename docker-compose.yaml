@@ -54,9 +54,3 @@ services:
       - "3306:3306"
     volumes:
       - "./docker/.volumes/mysql:/var/lib/mysql"
-
-  git:
-    container_name: "tn7-git"
-    image: "docker.pkg.github.com/tommyheavenly7/github/git:latest"
-    volumes:
-      - "./:/git"
