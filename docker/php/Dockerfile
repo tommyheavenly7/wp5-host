@@ -3,6 +3,7 @@ FROM php:7.4-fpm-alpine
 RUN apk --no-cache add \
     "autoconf>=2.69-r2" \
     "automake>=1.16.1-r0" \
+    "brotli-libs>=1.0.9-r1" \
     "build-base>=0.5-r1" \
     "curl>=7.69.1-r1" \
     "ffmpeg>=4.3.1-r0" \
