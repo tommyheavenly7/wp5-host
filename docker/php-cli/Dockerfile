@@ -65,6 +65,7 @@ RUN install-php-extensions \
     opcache \
     pcntl \
     pdo_mysql \
+    rar \
     redis \
     shmop \
     soap \
@@ -75,16 +76,6 @@ RUN install-php-extensions \
     xdebug \
     xsl \
     zip
-
-WORKDIR /tmp
-RUN wget https://github.com/esminis/php_pecl_rar/archive/v4.0.6.tar.gz \
-    && mkdir -p /tmp/rar \
-    && tar -xf v4.0.6.tar.gz -C /tmp/rar --strip-components=1 \
-    && rm v4.0.6.tar.gz \
-    && docker-php-ext-configure /tmp/rar --enable-rar \
-    && docker-php-ext-install /tmp/rar \
-    && rm -r /tmp/rar
-
 RUN printf  "[date]\ndate.timezone = %s\n" 'Asia/Tokyo' > /usr/local/etc/php/conf.d/date.ini \
     && echo "memory_limit=-1" > /usr/local/etc/php/conf.d/memory-limit.ini \
     && printf "[mbstring]\nmbstring.internal_encoding = %s\nmbstring.language = %s\n" 'UTF-8' 'Japanese' > /usr/local/etc/php/conf.d/mbstring.ini \
