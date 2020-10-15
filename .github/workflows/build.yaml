@@ -50,7 +50,7 @@ jobs:
       - name: Build a new container
         run: |
           echo ${{ secrets.PACKAGE_TOKEN }} | docker login docker.pkg.github.com -u ${{ secrets.USER_NAME }} --password-stdin
-          docker build --tag docker.pkg.github.com/tommyheavenly7/wp5-host/php-cli:7.4 ./docker/php-cli/
+          docker build --pull --tag docker.pkg.github.com/tommyheavenly7/wp5-host/php-cli:7.4 ./docker/php-cli/
           docker push docker.pkg.github.com/tommyheavenly7/wp5-host/php-cli:7.4
-          docker build --tag docker.pkg.github.com/tommyheavenly7/wp5-host/php-fpm:7.4 ./docker/php/
+          docker build --pull --tag docker.pkg.github.com/tommyheavenly7/wp5-host/php-fpm:7.4 ./docker/php/
           docker push docker.pkg.github.com/tommyheavenly7/wp5-host/php-fpm:7.4
