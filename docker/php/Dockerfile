@@ -30,6 +30,7 @@ RUN apk --no-cache add \
     "make>=4.2.1-r2" \
     "mysql-client>=10.4.12-r0" \
     "nasm>=2.14.02-r0" \
+    "oniguruma>=6.9.5-r2" \
     "py-pip>=18.1-r0" \
     "python3-dev>=3.8.5-r0" \
     "python3>=3.8.5-r0" \
