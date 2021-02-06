@@ -28,7 +28,7 @@ RUN apk --no-cache add \
     "libx11>=1.6.12-r0" \
     "libxml2>=2.9.10-r5" \
     "make>=4.3-r0" \
-    "mysql-client>=10.4.15-r0" \
+    "mysql-client>=10.5.8-r0" \
     "nasm>=2.14.02-r0" \
     "oniguruma>=6.9.5-r2" \
     "py-pip>=20.1.1-r0" \
