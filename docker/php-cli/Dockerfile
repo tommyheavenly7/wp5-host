@@ -28,6 +28,7 @@ RUN apk --no-cache add \
     "libx11>=1.6.12-r0" \
     "libxml2>=2.9.10-r5" \
     "make>=4.3-r0" \
+    "musl-utils>=1.2.2_pre2-r0" \
     "mysql-client>=10.5.8-r0" \
     "nasm>=2.14.02-r0" \
     "oniguruma>=6.9.5-r2" \
@@ -47,7 +48,7 @@ RUN cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.dist \
     && printf "FromLineOverride=%s\n" 'YES' >> /etc/ssmtp/ssmtp.conf
 
 # PHP
-ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod uga+x /usr/local/bin/install-php-extensions \
     && sync
 RUN install-php-extensions \
@@ -88,6 +89,5 @@ RUN printf  "[date]\ndate.timezone = %s\n" 'Asia/Tokyo' > /usr/local/etc/php/con
     && printf "\nxdebug.remote_connect_back = %s\nxdebug.remote_host = docker.for.mac.localhost" 'Off' >> /usr/local/etc/php/conf.d/xdebug.ini
 
 # composer
-RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/76a7060ccb93902cd7576b67264ad91c8a2700e2/web/installer -O - -q | php -- --quiet \
-    && cp composer.phar /usr/local/bin/composer
-
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+RUN chmod uga+x /usr/local/bin/composer

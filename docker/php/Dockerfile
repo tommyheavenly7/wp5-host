@@ -47,7 +47,7 @@ RUN cp /etc/ssmtp/ssmtp.conf /etc/ssmtp/ssmtp.conf.dist \
     && printf "FromLineOverride=%s\n" 'YES' >> /etc/ssmtp/ssmtp.conf
 
 # PHP
-ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod uga+x /usr/local/bin/install-php-extensions \
     && sync
 RUN install-php-extensions \

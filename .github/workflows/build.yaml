@@ -26,7 +26,8 @@ jobs:
 
       - name: Build test containers
         run: |
-          docker-compose --file docker-compose.test.yaml build --force-rm --compress
+          echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker-compose --file docker-compose.test.yaml build --force-rm --compress --pull
           docker-compose --file docker-compose.test.yaml up -d
           docker-compose --file docker-compose.test.yaml run --rm composer install
           docker-compose --file docker-compose.test.yaml run --rm composer fund
@@ -49,6 +50,7 @@ jobs:
 
       - name: Build a new container
         run: |
+          echo ${{ secrets.DOCKER_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
           echo ${{ secrets.PACKAGE_TOKEN }} | docker login docker.pkg.github.com -u ${{ secrets.USER_NAME }} --password-stdin
           docker build --pull --tag docker.pkg.github.com/tommyheavenly7/wp5-host/php-cli:7.4 ./docker/php-cli/
           docker push docker.pkg.github.com/tommyheavenly7/wp5-host/php-cli:7.4
