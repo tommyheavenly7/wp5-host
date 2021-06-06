@@ -6,7 +6,7 @@ RUN apk --no-cache add \
     "brotli-libs>=1.0.9-r1" \
     "build-base>=0.5-r2" \
     "curl>=7.69.1-r3" \
-    "ffmpeg>=4.3.1-r0" \
+    "ffmpeg>=4.3.1-r4" \
     "g++>=9.3.0-r2" \
     "gcc>=9.3.0-r2" \
     "ghostscript>=9.52-r0" \
@@ -28,6 +28,7 @@ RUN apk --no-cache add \
     "libx11>=1.6.12-r0" \
     "libxml2>=2.9.10-r5" \
     "make>=4.3-r0" \
+    "musl-utils>=1.2.2_pre2-r0" \
     "mysql-client>=10.5.8-r0" \
     "nasm>=2.14.02-r0" \
     "oniguruma>=6.9.5-r2" \
