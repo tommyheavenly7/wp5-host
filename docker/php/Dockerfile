@@ -5,7 +5,7 @@ RUN apk --no-cache add \
     "automake>=1.16.2-r0" \
     "brotli-libs>=1.0.9-r1" \
     "build-base>=0.5-r2" \
-    "curl>=7.77.0-r0" \
+    "curl>=7.79.1-r0" \
     "ffmpeg>=4.3.1-r4" \
     "g++>=9.3.0-r2" \
     "gcc>=9.3.0-r2" \
