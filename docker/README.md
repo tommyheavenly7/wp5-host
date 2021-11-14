@@ -10,11 +10,22 @@ it to log in the repo.
 echo $PACKAGE_TOKEN | docker login ghcr.io -u $USER_NAME --password-stdin
 ```
 
+```shell script
+echo $DOCKER_TOKEN | docker login -u $DOCKER_USER_NAME --password-stdin
+```
+
 ## Build the latest images
 
 ```shell script
-    docker build --pull --tag ghcr.io/tommyheavenly7/wp5-host/php-cli:7.4 ./docker/php-cli/
-    docker build --pull --tag ghcr.io/tommyheavenly7/wp5-host/php-fpm:7.4 ./docker/php/
+docker build --pull --tag ghcr.io/tommyheavenly7/wp5-host/php-cli:7.4 ./docker/php-cli/
+docker build --pull --tag ghcr.io/tommyheavenly7/wp5-host/php-fpm:7.4 ./docker/php/
+```
+
+```shell script
+docker build --pull --tag tommynovember7/wp5-host:7.4-cli ./docker/php-cli/
+docker build --pull --tag tommynovember7/wp5-host:7.4-fpm ./docker/php/
+docker build --pull --tag tommynovember7/wp5-host:latest ./docker/php-cli/
+docker build --pull --tag tommynovember7/wp5-host:latest-fpm ./docker/php/
 ```
 
 ## Push the images
@@ -22,4 +33,11 @@ echo $PACKAGE_TOKEN | docker login ghcr.io -u $USER_NAME --password-stdin
 ```shell script
 docker push ghcr.io/tommyheavenly7/wp5-host/php-cli:7.4
 docker push ghcr.io/tommyheavenly7/wp5-host/php-fpm:7.4
+```
+
+```shell script
+docker push tommynovember7/wp5-host:7.4-cli
+docker push tommynovember7/wp5-host:7.4-fpm
+docker push tommynovember7/wp5-host:latest
+docker push tommynovember7/wp5-host:latest-fpm
 ```
