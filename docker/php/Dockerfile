@@ -14,8 +14,8 @@ RUN apk --no-cache add \
     "gnutls>=3.6.15-r0" \
     "groff>=1.22.4-r1" \
     "icu-dev>=67.1-r0" \
-    "imagemagick-dev>=7.0.10.48-r0" \
-    "imagemagick>=7.0.10.48-r0" \
+    "imagemagick-dev>=7.0.11.14-r0" \
+    "imagemagick>=7.0.11.14-r0" \
     "lcms2-dev>=2.9-r1" \
     "less>=551-r0" \
     "libgit2-dev>=1.0.0-r0" \
