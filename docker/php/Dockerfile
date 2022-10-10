@@ -5,7 +5,7 @@ RUN apk --no-cache add \
     "automake>=1.16.2-r0" \
     "brotli-libs>=1.0.9-r1" \
     "build-base>=0.5-r2" \
-    "curl>=7.79.1-r0" \
+    "curl>=7.83.1-r3" \
     "ffmpeg>=4.4.1-r0" \
     "g++>=9.3.0-r2" \
     "gcc>=9.3.0-r2" \
@@ -36,6 +36,7 @@ RUN apk --no-cache add \
     "python3-dev>=3.8.5-r0" \
     "python3>=3.8.5-r0" \
     "ssmtp>=2.64-r14" \
+    "tiff>=4.4.0-r0" \
     "zlib-dev>=1.2.11-r3"
 
 # Python
