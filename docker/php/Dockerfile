@@ -35,6 +35,7 @@ RUN apk --no-cache add \
     "mysql-client>=10.5.10-r0" \
     "nasm>=2.14.02-r0" \
     "oniguruma>=6.9.5-r2" \
+    "pixman>=0.40.0-r4" \
     "py-pip>=20.1.1-r0" \
     "python3-dev>=3.8.5-r0" \
     "python3>=3.8.5-r0" \
